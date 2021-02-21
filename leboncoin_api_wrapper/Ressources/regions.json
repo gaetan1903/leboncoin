@@ -1,0 +1,273 @@
+[
+  {
+    "id": "1",
+    "name": "Alsace",
+    "channel": "alsace",
+    "departments": [
+      "67",
+      "68"
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Aquitaine",
+    "channel": "aquitaine",
+    "departments": [
+      "24",
+      "33",
+      "40",
+      "47",
+      "64"
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Auvergne",
+    "channel": "auvergne",
+    "departments": [
+      "3",
+      "15",
+      "43",
+      "63"
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Basse-Normandie",
+    "channel": "basse_normandie",
+    "departments": [
+      "14",
+      "50",
+      "61"
+    ]
+  },
+  {
+    "id": "5",
+    "name": "Bourgogne",
+    "channel": "bourgogne",
+    "departments": [
+      "21",
+      "58",
+      "71",
+      "89"
+    ]
+  },
+  {
+    "id": "6",
+    "name": "Bretagne",
+    "channel": "bretagne",
+    "departments": [
+      "22",
+      "29",
+      "35",
+      "56"
+    ]
+  },
+  {
+    "id": "7",
+    "name": "Centre",
+    "channel": "centre",
+    "departments": [
+      "18",
+      "28",
+      "36",
+      "37",
+      "41",
+      "45"
+    ]
+  },
+  {
+    "id": "8",
+    "name": "Champagne-Ardenne",
+    "channel": "champagne_ardenne",
+    "departments": [
+      "8",
+      "10",
+      "51",
+      "52"
+    ]
+  },
+  {
+    "id": "9",
+    "name": "Corse",
+    "channel": "corse",
+    "departments": [ ]
+  },
+  {
+    "id": "10",
+    "name": "Franche-Comté",
+    "channel": "franche_comte",
+    "departments": [
+      "25",
+      "39",
+      "70",
+      "90"
+    ]
+  },
+  {
+    "id": "11",
+    "name": "Haute-Normandie",
+    "channel": "haute_normandie",
+    "departments": [
+      "27",
+      "76"
+    ]
+  },
+  {
+    "id": "12",
+    "name": "Ile-de-France",
+    "channel": "ile_de_france",
+    "departments": [
+      "75",
+      "77",
+      "78",
+      "91",
+      "92",
+      "93",
+      "94",
+      "95"
+    ]
+  },
+  {
+    "id": "13",
+    "name": "Languedoc-Roussillon",
+    "channel": "languedoc_roussillon",
+    "departments": [
+      "11",
+      "30",
+      "34",
+      "48",
+      "66"
+    ]
+  },
+  {
+    "id": "14",
+    "name": "Limousin",
+    "channel": "limousin",
+    "departments": [
+      "19",
+      "23",
+      "87"
+    ]
+  },
+  {
+    "id": "15",
+    "name": "Lorraine",
+    "channel": "lorraine",
+    "departments": [
+      "54",
+      "55",
+      "57",
+      "88"
+    ]
+  },
+  {
+    "id": "16",
+    "name": "Midi-Pyrénées",
+    "channel": "midi_pyrenees",
+    "departments": [
+      "9",
+      "12",
+      "31",
+      "32",
+      "46",
+      "65",
+      "81",
+      "82"
+    ]
+  },
+  {
+    "id": "17",
+    "name": "Nord-Pas-de-Calais",
+    "channel": "nord_pas_de_calais",
+    "departments": [
+      "59",
+      "62"
+    ]
+  },
+  {
+    "id": "18",
+    "name": "Pays de la Loire",
+    "channel": "pays_de_la_loire",
+    "departments": [
+      "44",
+      "49",
+      "53",
+      "72",
+      "85"
+    ]
+  },
+  {
+    "id": "19",
+    "name": "Picardie",
+    "channel": "picardie",
+    "departments": [
+      "2",
+      "60",
+      "80"
+    ]
+  },
+  {
+    "id": "20",
+    "name": "Poitou-Charentes",
+    "channel": "poitou_charentes",
+    "departments": [
+      "16",
+      "17",
+      "79",
+      "86"
+    ]
+  },
+  {
+    "id": "21",
+    "name": "Provence-Alpes-Côte d'Azur",
+    "channel": "provence_alpes_cote_d_azur",
+    "departments": [
+      "4",
+      "5",
+      "6",
+      "13",
+      "83",
+      "84"
+    ]
+  },
+  {
+    "id": "22",
+    "name": "Rhône-Alpes",
+    "channel": "rhone_alpes",
+    "departments": [
+      "1",
+      "7",
+      "26",
+      "38",
+      "42",
+      "69",
+      "73",
+      "74"
+    ]
+  },
+  {
+    "id": "23",
+    "name": "Guadeloupe",
+    "channel": "guadeloupe",
+    "departments": [ ]
+  },
+  {
+    "id": "24",
+    "name": "Martinique",
+    "channel": "martinique",
+    "departments": [ ]
+  },
+  {
+    "id": "25",
+    "name": "Guyane",
+    "channel": "guyane",
+    "departments": [ ]
+  },
+  {
+    "id": "26",
+    "name": "Réunion",
+    "channel": "reunion",
+    "departments": [ ]
+  }
+]
