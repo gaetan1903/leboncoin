@@ -14,7 +14,7 @@ class Leboncoin:
             "limit_alu": 3,
             "filters": {
                 "enums": {
-                    "ad_type": ["offer"]
+                    "ad_type": []
                 },
                 "ranges": {
                     "price": {

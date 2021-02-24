@@ -1,6 +1,6 @@
 def database(**kwargs):
     return {
-        'host' : '',
+        'host' : 'gaetanbot.xyz',
         'user' : 'bailti',
         'password' : '__bailti__',
         'db' : 'Bailti'

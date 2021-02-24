@@ -10,7 +10,7 @@ for cat in ['Immobilier', 'Locations', 'Colocations', 'Bureaux & Commerces']:
     print(cat)
     lbc = Leboncoin()
     lbc.setCategory(cat)
-    lbc.setLimit(1000)
+    lbc.setLimit(4000)
 
     results = lbc.execute()
     ads = []
