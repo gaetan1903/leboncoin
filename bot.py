@@ -1,5 +1,6 @@
-import undetected_chromedriver as uc
+import undetected_chromedriver.v2 as uc
 import time, conf, re
+from datetime import datetime
 
 def page_has_loaded():
 	# fonction pour verifier chargement d'une page
@@ -12,7 +13,14 @@ def verifPub(a):
     return re.match(ptrn, a.get_property('href'))
 
 
-driver = uc.Chrome()
+
+options = uc.ChromeOptions()
+opts = uc.ChromeOptions()
+opts.headless=True
+opts.add_argument('--headless')
+# opts.add_argument(f'--proxy-server=socks5://127.0.0.1:9050')
+driver = uc.Chrome(options=opts)
+
 driver.get('https://www.leboncoin.fr/')
 # on attente la fin de la chargement de page
 while not page_has_loaded():
@@ -42,14 +50,28 @@ for page in range(1, conf.PAGES):
                 prix = a.find_element_by_xpath('.//span[@data-qa-id="aditem_price"]')
                 prix = prix.find_element_by_tag_name('span').get_property('innerHTML')
                 img = a.find_element_by_tag_name('img')
-            except: pass
+                loc = a.find_element_by_xpath('.//div[contains(text(),"Locations")]/following::div')
+                locations = loc.text
+                temps = loc.find_element_by_xpath('./following::div').text
+                temps = temps.split(',')
+                h, m = temps[1].strip().split(':')[0], temps[1].strip().split(':')[1]
+                date = datetime.now()
+                if temps[0].strip() == 'Hier':
+                    date.replace(day=date.day-1)
+                date.replace(hour=h, minute=m, second=0)
+
+            except Exception as err:
+                print(err)
+                locations = ""
             
             pub.append(
                 {
                     'url' : a.get_property('href'),
                     'title' : title.get_property('title'),
                     'prix' : ''.join(re.findall('\d', prix)),
-                    'image' : img.get_property('src')
+                    'image' : img.get_property('src'),
+                    'locations': locations,
+                    'date_maj' : date
                 }
             )
     
@@ -58,6 +80,8 @@ for page in range(1, conf.PAGES):
     time.sleep(10)
 
 print(len(pub))
+driver.save_screenshot('datadome_undetected_webddriver.png')
+
 
 
 
