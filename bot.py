@@ -1,6 +1,10 @@
-import undetected_chromedriver.v2 as uc
+import undetected_chromedriver as uc
 import time, conf, re
 from datetime import datetime
+
+# uc.TARGET_VERSION = 87
+# uc.install()
+
 
 def page_has_loaded():
 	# fonction pour verifier chargement d'une page
@@ -16,8 +20,8 @@ def verifPub(a):
 
 options = uc.ChromeOptions()
 opts = uc.ChromeOptions()
-opts.headless=True
-opts.add_argument('--headless')
+# opts.headless=True
+# opts.add_argument('--headless')
 # opts.add_argument(f'--proxy-server=socks5://127.0.0.1:9050')
 driver = uc.Chrome(options=opts)
 
@@ -48,8 +52,8 @@ for page in range(1, conf.PAGES):
             try:
                 title = a.find_element_by_xpath('.//p[@data-qa-id="aditem_title"]')
                 prix = a.find_element_by_xpath('.//span[@data-qa-id="aditem_price"]')
-                prix = prix.find_element_by_tag_name('span').get_property('innerHTML')
                 img = a.find_element_by_tag_name('img')
+                prix = prix.find_element_by_tag_name('span').get_property('innerHTML')
                 loc = a.find_element_by_xpath('.//div[contains(text(),"Locations")]/following::div')
                 locations = loc.text
                 temps = loc.find_element_by_xpath('./following::div').text
@@ -58,29 +62,35 @@ for page in range(1, conf.PAGES):
                 date = datetime.now()
                 if temps[0].strip() == 'Hier':
                     date.replace(day=date.day-1)
-                date.replace(hour=h, minute=m, second=0)
+                date.replace(hour=int(h), minute=int(m), second=0)
+                
+          
+            
+                pub.append(
+                    {
+                        'url' : a.get_property('href'),
+                        'title' : title.get_property('title'),
+                        'prix' : ''.join(re.findall(r'\d', prix)),
+                        'image' : img.get_property('src'),
+                        'locations': locations,
+                        'date_maj' : date
+                    }
+                )
 
             except Exception as err:
                 print(err)
-                locations = ""
-            
-            pub.append(
-                {
-                    'url' : a.get_property('href'),
-                    'title' : title.get_property('title'),
-                    'prix' : ''.join(re.findall('\d', prix)),
-                    'image' : img.get_property('src'),
-                    'locations': locations,
-                    'date_maj' : date
-                }
-            )
+                
     
     # un timer de 10 secondes pour chaque page
     break
     time.sleep(10)
 
 print(len(pub))
-driver.save_screenshot('datadome_undetected_webddriver.png')
+
+for u in pub:
+    print(u)
+    print("\n\n")
+# driver.save_screenshot('datadome_undetected_webddriver.png')
 
 
 
