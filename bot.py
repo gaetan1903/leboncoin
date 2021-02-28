@@ -1,4 +1,4 @@
-import undetected_chromedriver as uc
+import undetected_chromedriver.v2 as uc
 import time, conf, re, mysql.connector
 from datetime import datetime
 
@@ -7,19 +7,17 @@ from datetime import datetime
 
 def initDb():
     cursor.execute('''
-        CREATE TABLE `Publication` IF NOT EXISTS (
-            `url` VARCHAR(512) NOT NULL DEFAULT '' COLLATE 'utf8mb4_general_ci',
+        CREATE TABLE IF NOT EXISTS `Publication`(
+            `url` VARCHAR(512) NOT NULL DEFAULT '',
             `date_maj` DATETIME NULL DEFAULT NULL,
-            `type` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
-            `categorie` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
-            `titre` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
-            `prix` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
-            `localisation` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
-            `image` TEXT NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
-            PRIMARY KEY (`url`) USING BTREE
+            `type` VARCHAR(50) NULL DEFAULT NULL,
+            `categorie` VARCHAR(50) NULL DEFAULT NULL,
+            `titre` VARCHAR(255) NULL DEFAULT NULL,
+            `prix` VARCHAR(255) NULL DEFAULT NULL,
+            `localisation` VARCHAR(255) NULL DEFAULT NULL,
+            `image` TEXT NULL DEFAULT NULL,
+            PRIMARY KEY (`url`)
         )
-        COLLATE='utf8mb4_general_ci'
-        ENGINE=InnoDB ;
     ''')
     db.commit()
 
@@ -38,7 +36,7 @@ def verifPub(a):
 db = mysql.connector.connect(**conf.database)
 cursor = db.cursor()
 initDb()
-exit()
+
 options = uc.ChromeOptions()
 opts = uc.ChromeOptions()
 # opts.headless=True
@@ -61,6 +59,7 @@ except: pass
 
 # on va a la page de resultat
 for page in range(1, conf.PAGES):
+    print(f'Page N°{page}')
     driver.get(f'https://www.leboncoin.fr/{conf.CATEGORIES}/{conf.TYPE}/' \
         + ('' if page == 1 else f'p-{page}') )
     while not page_has_loaded():
@@ -106,14 +105,14 @@ for page in range(1, conf.PAGES):
 
                 print(pub, end='\n\n')
 
-                time.sleep(2)
+                time.sleep(1)
 
             except Exception as err:
                 print(err)
                 
     
-    # un timer de 10 secondes pour chaque page
-    time.sleep(10)
+    # un timer de 5 secondes pour chaque page
+    time.sleep(5)
 
 db.close()
 driver.close()
