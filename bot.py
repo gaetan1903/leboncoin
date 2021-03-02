@@ -16,6 +16,7 @@ def initDb():
             `prix` VARCHAR(255) NULL DEFAULT NULL,
             `localisation` VARCHAR(255) NULL DEFAULT NULL,
             `image` TEXT NULL DEFAULT NULL,
+            `verif` INT(1) NOT NULL DEFAULT '0',
             PRIMARY KEY (`url`)
         )
     ''')
@@ -37,7 +38,6 @@ db = mysql.connector.connect(**conf.database)
 cursor = db.cursor()
 initDb()
 
-options = uc.ChromeOptions()
 opts = uc.ChromeOptions()
 # opts.headless=True
 # opts.add_argument('--headless')
@@ -95,11 +95,12 @@ for page in range(1, conf.PAGES):
                         'title' : title.get_property('title'),
                         'prix' : ''.join(re.findall(r'\d', prix)),
                         'localisation': locations,
-                        'image' : ','.join([im.get_property('src') for im in img])
+                        'image' : ','.join([im.get_property('src') for im in img]),
+                        'verif' : 0
                 }
 
                 cursor.execute('''
-                    INSERT IGNORE INTO Publication VALUES(%s, %s, %s, %s, %s, %s, %s, %s)
+                    INSERT IGNORE INTO Publication VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)
                 ''', list(pub.values()))
                 db.commit()
 
