@@ -1,4 +1,4 @@
-import undetected_chromedriver.v2 as uc
+import undetected_chromedriver as uc
 import time, conf, re, mysql.connector
 
 
@@ -15,7 +15,9 @@ data = cursor.fetchall()
 
 #  *************************
 opts = uc.ChromeOptions()
+opts.add_experimental_option("prefs", {'protocol_handler.excluded_schemes.tel': 'false'})
 driver = uc.Chrome(options=opts)
+driver.maximize_window()
 driver.get('https://www.leboncoin.fr/')
 while not page_has_loaded(): time.sleep(5)
 
@@ -49,17 +51,29 @@ for url in data:
         piece = None
     
     try:
+        description = driver.find_element_by_xpath('.//div[@data-qa-id="adview_description_container"]').text
+    except:
+        description = None
+
+    try:
         # driver.find_element_by_xpath('.//*[@data-qa-id="adview_button_phone_contact"]').click()
-        driver.find_element_by_xpath('.//div[@data-pub-id="clicknumero"]').click()
+        divNum = driver.find_element_by_xpath('.//div[@data-pub-id="clicknumero"]')
+        btn = divNum.find_element_by_tag_name('button')
+        driver.execute_script("arguments[0].click();", btn)
         time.sleep(1)
         tel = driver.find_element_by_xpath('div[@data-qa-id="adview_number_phone_contact"]').text
     except Exception as err:
         print(err)
         tel = None
 
-    print(surface, piece, tel)
+    print(surface, piece, tel, description)
 
-    break
+    cursor.execute('''
+        UPDATE Publication SET
+        surface = %s, piece = %s, description = %s
+        WHERE url = %s
+    ''', (surface, piece, description, url))
+    db.commit()
 
 
 
